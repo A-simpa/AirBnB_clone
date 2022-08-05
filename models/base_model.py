@@ -1,22 +1,18 @@
 #!/usr/bin/python3
-"""Airbnb clone"""
-
+""" definition of the base_model of console"""
 
 import uuid
 from datetime import datetime
-"""imported uuid to give random UUID"""
 
 
 class BaseModel:
     """defines all common attributes/methods for other classes"""
 
-
-
     def __init__(self, *args, **kwargs):
         """args allow multiple arguments while kwargs allows
             for multiple key/value pair"""
 
-        if kwargs is not None:
+        if not kwargs:
             """if kwargs is not empty, each key of the
                 dictionary is an attribute name"""
 
@@ -37,22 +33,17 @@ class BaseModel:
                  (timespec='microseconds')), BaseModel.DATE_TIME)
 
     def __str__(self):
-        return ("[{}] ({}) {}".format
-                (self.__class__.__name__,self.id, self.__dict__))
+        return (f"[BaseModel] ({self.id}) {self.__dict__}")
 
     def save(self):
-        """updates the public instance attribute updated
-            current time"""
-        return str(self.updated_at)
+        """ change updated_at to the current time now"""
+        self.updated_at = datetime.now()
 
     def to_dict(self):
-        """returns a dictionary containing all keys/values
-            of __dict__ of the instance"""
 
-        new_dict = self.__dict__
-        new_dict["__class__"] = self.__class__.__name__
-        return new_dict
-
-
-if __name__ == "__main__":
-    main()
+        """a proper representation all object properties"""
+        rep = self.__dict__
+        rep["__class__"] = "BaseModel"
+        rep["updated_at"] = rep["updated_at"].isoformat()
+        rep["created_at"] = rep["created_at"].isoformat()
+        return rep
