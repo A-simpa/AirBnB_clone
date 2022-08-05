@@ -10,16 +10,35 @@ from datetime import datetime
 class BaseModel:
     """defines all common attributes/methods for other classes"""
 
-    def __init__(self, id=None, created_at=None, updated_at=None):
-        self.id = str(uuid.uuid4())
-        self.created_at = \
-            str(datetime.now().isoformat(timespec='microseconds'))
-        self.updated_at = \
-            str(datetime.now().isoformat(timespec='microseconds'))
+
+
+    def __init__(self, *args, **kwargs):
+        """args allow multiple arguments while kwargs allows
+            for multiple key/value pair"""
+
+        if kwargs is not None:
+            """if kwargs is not empty, each key of the
+                dictionary is an attribute name"""
+
+            for key, value in kwargs.items():
+                if key in ['created_at', 'updated_at']:
+                    DATE_TIME = datetime.strptime(str(datetime.now().isformat
+                                  (timespec='microseconds')), BaseModel.DATE_TIME)
+
+                if key not in ['__class__']:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.strptime
+            (str(datetime.now().isoformat
+                 (timespec='microseconds')), BaseModel.DATE_TIME)
+            self.updated_at = datetime.strptime
+            (str(datetime.now().isoformat
+                 (timespec='microseconds')), BaseModel.DATE_TIME)
 
     def __str__(self):
         return ("[{}] ({}) {}".format
-                (self.__class__.__name__, self.id, self.__dict__))
+                (self.__class__.__name__,self.id, self.__dict__))
 
     def save(self):
         """updates the public instance attribute updated
@@ -30,7 +49,9 @@ class BaseModel:
         """returns a dictionary containing all keys/values
             of __dict__ of the instance"""
 
-        return self.__dict__
+        new_dict = self.__dict__
+        new_dict["__class__"] = self.__class__.__name__
+        return new_dict
 
 
 if __name__ == "__main__":
