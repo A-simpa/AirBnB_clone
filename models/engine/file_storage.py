@@ -2,30 +2,33 @@
 """JSON representation of the data structure"""
 
 
-import json
-
+import json as js
 
 class FileStorage:
-    """serializes instances to a JSON file
-        and deserializes JSON file to instances"""
-
-    __path = "file.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        return FileStorage.__objects
+        """ returns all objects """
+        return self.__objects
 
     def new(self, obj):
-        class_name = obj.__class__.__name__
-        id = obj.id
-        New = class_name + "." + id
-        return New
+        """ set a new obj"""
+        FileStorage.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
-        with open(FileStorage.__path, 'w') as file:
-            return json.dumps(file)
+        """write(serialize) an object as a string to a json file"""
+        with open(FileStorage.__file_path, "w") as f:
+            store_object = {}
+            for id, obj in FileStorage.__objects.items():
+                store_object[id] = obj.to_dict()
+            js.dump(store_object, f)
 
     def reload(self):
-        if FileStorage.__path:
-            with open(FileStorage.__path, 'r') as myfile:
-                return json.loads(self, myfile)
+        """ deserialize json object in __file_path """
+        try:
+            with open(FileStorage.__file_path, "r") as f:
+                for obj in js.load(f).values():
+                    self.new(eval(obj["__class__"])(**obj))
+        except Exception as e:
+            return
