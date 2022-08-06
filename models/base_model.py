@@ -4,11 +4,10 @@
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     """ The BaseModel class for console """
     def __init__(self, *args, **kwargs):
-
-        from models import storage
         if kwargs:
             for attr, value in kwargs.items():
                 if attr == "created_at" or attr == "updated_at":
@@ -16,6 +15,8 @@ class BaseModel:
                 elif attr != "__class__":
                     self.__dict__[attr] = value
         else:
+            from models import storage
+
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
@@ -27,7 +28,9 @@ class BaseModel:
     def save(self):
         """ change updated_at to the current time now"""
         self.updated_at = datetime.now()
+
         from models import storage
+
         storage.save()
 
     def to_dict(self):
