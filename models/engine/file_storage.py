@@ -16,13 +16,13 @@ class FileStorage:
 
     def new(self, obj):
         """ set a new obj"""
-        FileStorage.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
         """write(serialize) an object as a string to a json file"""
         with open(FileStorage.__file_path, "w") as f:
             store_object = {}
-            for id, obj in FileStorage.__objects.items():
+            for id, obj in self.__objects.items():
                 store_object[id] = obj.to_dict()
             js.dump(store_object, f)
 

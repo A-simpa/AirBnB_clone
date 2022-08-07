@@ -23,7 +23,8 @@ class BaseModel:
 
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = datetime.now
+            self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         return (f"[BaseModel] ({self.id}) {self.__dict__}")
@@ -33,15 +34,13 @@ class BaseModel:
         self.updated_at = datetime.now()
 
         from models import storage
-
-        storage.new(self)
         storage.save()
 
     def to_dict(self):
 
         """a proper representation all object properties"""
-        rep = self.__dict__
+        rep = self.__dict__.copy()
         rep["__class__"] = "BaseModel"
-        rep["updated_at"] = rep["updated_at"].isoformat()
-        rep["created_at"] = rep["created_at"].isoformat()
+        rep["updated_at"] = (rep["updated_at"]).isoformat()
+        rep["created_at"] = (rep["created_at"]).isoformat()
         return rep
