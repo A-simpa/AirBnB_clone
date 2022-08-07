@@ -37,8 +37,8 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-
         """a proper representation all object properties"""
+
         rep = self.__dict__.copy()
         rep["__class__"] = "BaseModel"
         rep["updated_at"] = self.updated_at.isoformat()
