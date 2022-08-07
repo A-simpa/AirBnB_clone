@@ -24,23 +24,23 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
-        return (f"[BaseModel] ({self.id}) {self.__dict__}")
+        """ a string representation of an object """
+        return (f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
 
     def save(self):
         """ change updated_at to the current time now"""
         self.updated_at = datetime.now()
 
         from models import storage
-
-        storage.new(self)
         storage.save()
 
     def to_dict(self):
+        """a proper representation all object properties as a dictionary"""
 
-        """a proper representation all object properties"""
-        rep = self.__dict__
+        rep = self.__dict__.copy()
         rep["__class__"] = "BaseModel"
         rep["updated_at"] = self.updated_at.isoformat()
         rep["created_at"] = self.created_at.isoformat()
