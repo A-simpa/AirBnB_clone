@@ -32,6 +32,5 @@ class FileStorage:
             with open(self.__file_path, "r", encoding="utf-8") as f:
                 for obj in js.load(f).values():
                     self.new(eval(obj["__class__"])(**obj))
-                    print(self.__objects)
         except FileNotFoundError:
             return
