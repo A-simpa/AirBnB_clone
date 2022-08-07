@@ -4,7 +4,7 @@
 
 import json as js
 from models.base_model import BaseModel
-
+from models.user import User
 
 class FileStorage:
     __file_path = "file.json"
@@ -20,7 +20,7 @@ class FileStorage:
 
     def save(self):
         """write(serialize) an object as a string to a json file"""
-        with open(FileStorage.__file_path, "w") as f:
+        with open(self.__file_path, "w") as f:
             store_object = {}
             for id, obj in self.__objects.items():
                 store_object[id] = obj.to_dict()

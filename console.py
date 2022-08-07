@@ -5,9 +5,10 @@ import sys
 
 import models
 from models.base_model import BaseModel
+from models.user import User
 
 # constants for shell
-class_names = ["BaseModel"]
+class_names = ["BaseModel", "User"]
 storage = models.storage
 
 

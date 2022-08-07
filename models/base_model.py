@@ -27,7 +27,8 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        return (f"[BaseModel] ({self.id}) {self.__dict__}")
+        """ a string representation of an object """
+        return (f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
 
     def save(self):
         """ change updated_at to the current time now"""
@@ -37,7 +38,7 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-        """a proper representation all object properties"""
+        """a proper representation all object properties as a dictionary"""
 
         rep = self.__dict__.copy()
         rep["__class__"] = "BaseModel"
