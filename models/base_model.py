@@ -23,7 +23,7 @@ class BaseModel:
 
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = datetime.now
+            self.updated_at = datetime.now()
 
     def __str__(self):
         return (f"[BaseModel] ({self.id}) {self.__dict__}")
@@ -42,6 +42,6 @@ class BaseModel:
         """a proper representation all object properties"""
         rep = self.__dict__
         rep["__class__"] = "BaseModel"
-        rep["updated_at"] = rep["updated_at"].isoformat()
-        rep["created_at"] = rep["created_at"].isoformat()
+        rep["updated_at"] = self.updated_at.isoformat()
+        rep["created_at"] = self.created_at.isoformat()
         return rep
