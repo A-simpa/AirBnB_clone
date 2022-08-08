@@ -80,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         elif f"{line[0]}.{line[1]}" in storage.all():
             del ((storage.all())[f"{line[0]}.{line[1]}"])
-            storage.reload()
+            storage.save()
         else:
             print("** no instance found **")
 
