@@ -14,13 +14,14 @@ from models.amenity import Amenity
 
 # constants for shell
 class_names = [
-"BaseModel",
-"User",
-"State",
-"Place",
-"City",
-"Review",
-"Amenity"]
+    "BaseModel",
+    "User",
+    "State",
+    "Place",
+    "City",
+    "Review",
+    "Amenity"
+]
 
 storage = models.storage
 
@@ -82,18 +83,23 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
-    def do_all(self, cls):
+    def do_all(self, line):
         """ print a list of all objects """
-        cls = cls.strip()
+        line = (line.strip()).split()
         data = storage.all()
         all_object = []
 
-        if cls and cls not in class_names:
-            print("** class doesn't exist **")
-        else:
+        if len(line) == 0:
             for i in data:
                 all_object.append(str(data[i]))
             print(all_object)
+        elif line[0] in class_names:
+            for i in data:
+                if line[0] in i:
+                    all_object.append(str(data[i]))
+            print(all_object)
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, line):
         """ updates the attributes of a class """

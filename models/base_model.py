@@ -41,7 +41,7 @@ class BaseModel:
         """a proper representation all object properties as a dictionary"""
 
         rep = self.__dict__.copy()
-        rep["__class__"] = "BaseModel"
+        rep["__class__"] = self.__class__.__name__
         rep["updated_at"] = self.updated_at.isoformat()
         rep["created_at"] = self.created_at.isoformat()
         return rep
