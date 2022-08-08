@@ -73,13 +73,14 @@ class HBNBCommand(cmd.Cmd):
         line = (line.strip()).split()
 
         if len(line) == 0:
-            print("** class name is missing **")
+            print("** class name missing **")
         elif line[0] not in class_names:
             print("** class doesn't exist **")
         elif len(line) < 2:
             print("** instance id missing **")
         elif f"{line[0]}.{line[1]}" in storage.all():
             del ((storage.all())[f"{line[0]}.{line[1]}"])
+            storage.save()
         else:
             print("** no instance found **")
 
