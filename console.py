@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, cls):
         """create an object of specified class"""
         if not cls:
-            print("** class name is missing **")
+            print("** class name missing **")
         elif cls in class_names:
             print(eval(f"{cls}")().id)
             storage.save()
@@ -58,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
         line = (line.strip()).split()
 
         if len(line) == 0:
-            print("** class name is missing **")
+            print("** class name missing **")
         elif line[0] not in class_names:
             print("** class doesn't exist **")
         elif len(line) < 2:
@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(line) < 2:
             print("** instance id missing **")
         elif f"{line[0]}.{line[1]}" not in storage.all():
-            print("** no instance is found **")
+            print("** no instance found **")
         elif len(line) < 3:
             print("** attribute name missing **")
         elif len(line) < 4:
