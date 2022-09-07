@@ -4,5 +4,11 @@ header {
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
     justify-content: centre;
-    align-items: left;
+}
+
+.logo {
+    background-image: url(../images/logo.png);
+    position: absolute;
+    height: 60px;
+    width: 136px;
 }
