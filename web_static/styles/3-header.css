@@ -1,15 +1,6 @@
-header {
-    background-color: #FFFFFF;
+header{
     height: 70px;
     width: 100%;
-    border-bottom: 1px solid #CCCCCC;
-    justify-content: centre;
-}
-
-.logo {
-    background-image: url(../images/logo.png);
-    position: absolute;
-    height: 60px;
-    width: 136px;
-    left: 20px;
+    background-color:white;
+    border-bottom: 1px solid #cccccc;
 }
