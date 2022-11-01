@@ -1,0 +1,12 @@
+footer {
+    height: 60px;
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    border-top: 1px solid #cccccc;
+    bottom: 0;
+}
+.footer-note {
+    text-align: center;
+    vertical-align: auto;
+}
