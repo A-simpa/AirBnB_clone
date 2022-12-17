@@ -1,1 +1,1 @@
-pages for AirBnB 
+This directory implements webpage design.
